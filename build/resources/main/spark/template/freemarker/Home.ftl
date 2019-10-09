@@ -19,8 +19,7 @@
         <a href="/">Listado estudiante</a>
         </button>
         <button class="btn btn-outline-dark" type="button">
-            <a href="/NuevoEstudianteNavegacion">Nuevo estudiante</a>
-
+            <a href="/NuevoEstudiante">Nuevo estudiante</a>
         </button>
     </form>
 </nav>
