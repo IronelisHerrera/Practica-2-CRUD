@@ -7,6 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link  href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Para el Font-Awesome -->
+    <link  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <title>INICIO</title>
 </head>
@@ -39,6 +41,9 @@
         <th scope="col">NOMBRE</th>
         <th scope="col">APELLIDO</th>
         <th scope="col">TELEFONO</th>
+        <th scope="col">EDITAR</th>
+        <th scope="col">ELIMINAR</th>
+
     </tr>
     </thead>
     <tbody>
@@ -54,6 +59,9 @@
         <td>${estu.nombre}</td>
         <td>${estu.apellido}</td>
         <td>${estu.telefono}</td>
+        <td><button type="submit" value="editar" class="btn btn-primary"> <a href="/editar" style="color: azure"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></td>
+        <td><button type="submit" value="eliminar" class="btn btn-danger"> <a href="/delete" style="color: azure"> <i class="fa fa-trash"> </i></a></button></td>
+
     </tr>
         <#assign hola++>
     </#list>

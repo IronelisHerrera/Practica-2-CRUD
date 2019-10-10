@@ -6,20 +6,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Modelos/Estudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Modelos/Estudiante.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Modelos/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Modelos/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/Home.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/Home.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controladoras/ListaDeEstudiantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controladoras/ListaDeEstudiantes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/Estudiante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/Home.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/Home.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,6 +75,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Martinez\IdeaProjects\Practica#2-CRUD\src\main\resources\publico\bootstrap\font-awesome" />
       <recent name="C:\Users\Martinez\IdeaProjects\Practica#2-CRUD\src\main\resources\publico" />
       <recent name="C:\Users\Martinez\IdeaProjects\Practica#2-CRUD\src\main\resources\spark\template\freemarker\tema" />
       <recent name="C:\Users\Martinez\IdeaProjects\Practica#2-CRUD\src\main\resources\spark\template\freemarker\css" />
@@ -153,7 +144,7 @@
       <option name="presentableId" value="Default" />
       <updated>1570564121658</updated>
       <workItem from="1570564128161" duration="55216000" />
-      <workItem from="1570661544685" duration="4116000" />
+      <workItem from="1570661544685" duration="7927000" />
     </task>
     <servers />
   </component>
