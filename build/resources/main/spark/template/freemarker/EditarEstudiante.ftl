@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link  href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <title>NUEVO ESTUDIANTE</title>
+    <title>EDITAR ESTUDIANTE</title>
 </head>
 <body>
 
-<h1>Listado Etudiantes</h1>
+<h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Editar estudiante </strong></h2>
 <!--Para mostrar usar el form que se quiere mostrar-->
 <nav class="navbar navbar-light bg-light">
     <form class="form-inline">
         <button class="btn btn-outline-info " type="button">
             <a href="/">Listado estudiante</a>
-        </button>
+        </button>&nbsp;
         <button class="btn btn-outline-dark" type="button">
             <a href="/NuevoEstudianteNavegacion">Nuevo estudiante</a>
         </button>
@@ -26,7 +26,7 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold">NUEVO ESTUDIANTE</h4>
+            <h4 class="modal-title w-100 font-weight-bold">EDITAR ESTUDIANTE</h4>
 
         </div>
 

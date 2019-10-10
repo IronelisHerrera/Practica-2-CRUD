@@ -10,13 +10,13 @@
 </head>
 <body>
 
-<h1>Listado Etudiantes</h1>
+<h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Crear estudiante </strong></h2>
 <!--Para mostrar usar el form que se quiere mostrar-->
 <nav class="navbar navbar-light bg-light">
     <form class="form-inline">
         <button class="btn btn-outline-info " type="button">
             <a href="/">Listado estudiante</a>
-        </button>
+        </button>&nbsp;
         <button class="btn btn-outline-dark" type="button">
             <a href="/NuevoEstudianteNavegacion">Nuevo estudiante</a>
         </button>
