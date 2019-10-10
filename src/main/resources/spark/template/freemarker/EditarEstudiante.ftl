@@ -29,7 +29,9 @@
             <h4 class="modal-title w-100 font-weight-bold">NUEVO ESTUDIANTE</h4>
 
         </div>
+
         <div class="modal-body mx-6">
+
             <form method="post" action="/EditarUsuario" role="dialog">
 
                 <div class="form-group">
@@ -47,16 +49,19 @@
                 </div>
                 <div class="form-group">
                     <label for="telefono">Telefono</label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Telefono/Celular" value=${estuLista.telefono} "required>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Telefono/Celular" value="${estuLista.telefono} "required>
                 </div>
 
-                <button type="submit" value="crear" class="btn btn-primary"> <strong>Crear</strong>
+                <button type="submit"  class="btn btn-primary">  Actualizar</a>
 
                 </button>
+
             </form>
         </div>
+
     </div>
 </div>
+
 </body>
 
 

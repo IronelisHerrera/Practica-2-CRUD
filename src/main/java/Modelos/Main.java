@@ -15,12 +15,14 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.UnaryOperator;
 
 import static spark.Spark.*;
 
 
 public class Main {
-    private Estudiante estu = null;
+    private static Estudiante estu;
+    //private Estudiante estu = null;
 
 
     public static void main(String[] args) throws IOException {
@@ -74,6 +76,7 @@ public class Main {
             ListaDeEstudiantes.add(new Estudiante(matricula, nombre, apellido, telefono));
             response.redirect("/");
 
+
             return 1;
 
 
@@ -122,28 +125,28 @@ public class Main {
         });
         post("/EditarUsuario", (request, response) -> {
 
-                StringWriter writer = new StringWriter();
+            String matricula = (request.queryParams("matricula"));
+            String nombre = (request.queryParams("nombre"));
+            String apellido = (request.queryParams("apellido"));
+            String telefono = (request.queryParams("telefono"));
+            Estudiante estuLista = new Estudiante(matricula, nombre, apellido, telefono);
 
-                String matricula = request.queryParams("matricula");
-                String nombre = request.queryParams("nombre");
-                String apellido = request.queryParams("apellido");
-                String telefono = request.queryParams("telefono");
-                Estudiante estudiante = new Estudiante(matricula, nombre, apellido, telefono);
-                for (Estudiante estuLista: ListaDeEstudiantes)
-                {
-                    if(estuLista.getMatricula() == estudiante.getMatricula())
-                    {
-                        estuLista.setNombre(estudiante.getNombre());
-                        estuLista.setApellido(estudiante.getApellido());
-                        estuLista.setMatricula(estudiante.getMatricula());
-                        estuLista.setTelefono(estudiante.getTelefono());
-                        break;
-                    }
+            for (Estudiante edit : ListaDeEstudiantes) {
+
+                int var = ListaDeEstudiantes.indexOf(edit);
+
+                if(edit.getMatricula().equals(estuLista.getMatricula())){
+                    ListaDeEstudiantes.set(var,estuLista);
+                    break;
                 }
-                response.redirect("/");
-            return writer;
+            }
+            response.redirect("/");
 
+
+            return " ";
         });
+
+
 
 
 

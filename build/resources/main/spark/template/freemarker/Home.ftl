@@ -50,22 +50,22 @@
     <#if listadeestudiantes?size gt 0>
         <#assign hola=1 >
 
-    <#list listadeestudiantes as estu>
+        <#list listadeestudiantes as estu>
 
 
-    <tr>
-        <td>${hola}</td>
-        <td>${estu.matricula}</td>
-        <td>${estu.nombre}</td>
-        <td>${estu.apellido}</td>
-        <td>${estu.telefono}</td>
-        <td><button type="submit" class="btn btn-primary"> <a href="/editar/${estu.matricula}" style="color: azure"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button></td>
-        <td><button type="submit"  class="btn btn-danger"> <a href="/delete/${estu.matricula}" style="color: azure"> <i class="fa fa-trash"> </i></a></button></td>
+            <tr>
+                <td>${hola}</td>
+                <td>${estu.matricula}</td>
+                <td>${estu.nombre}</td>
+                <td>${estu.apellido}</td>
+                <td>${estu.telefono}</td>
+                <td><button type="submit" class="btn btn-primary"> <a href="/editar/${estu.matricula}" style="color: azure"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button></td>
+                <td><button type="submit"  class="btn btn-danger"> <a href="/delete/${estu.matricula}" style="color: azure"> <i class="fa fa-trash"> </i></a></button></td>
 
-    </tr>
-        <#assign hola++>
-    </#list>
+            </tr>
 
+         <#assign hola++>
+       </#list>
 
     </#if>
 

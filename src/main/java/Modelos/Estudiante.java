@@ -1,10 +1,5 @@
 package Modelos;
 
-import com.sun.org.apache.xpath.internal.objects.XString;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class  Estudiante {
 
     private String matricula;
@@ -36,6 +31,9 @@ public class  Estudiante {
 
     }
 
+    public Estudiante(String matricula) {
+    }
+
     public String getMatricula(){
         return matricula;
     }
@@ -60,6 +58,7 @@ public class  Estudiante {
     public String setApellido(String apellido){
         return this.apellido=apellido;
     }
+
     public String getTelefono(){
         return telefono;
 
@@ -69,6 +68,7 @@ public class  Estudiante {
     public String setTelefono(String telefono){
         return this.telefono=telefono;
     }
+
 
 
 }
