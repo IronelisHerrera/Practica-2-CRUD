@@ -63,7 +63,6 @@ public class Main {
 
         post("/NuevoEstudiante", (request, response) -> {
 
-           // StringWriter writerLabel = new StringWriter();
 
 
             String matricula = (request.queryParams("matricula"));
@@ -80,6 +79,76 @@ public class Main {
 
 
         });
+
+        get("/delete/:matricula", (request, response) -> {
+
+
+            for (Estudiante obj: ListaDeEstudiantes) {
+
+                if(obj.getMatricula().equals(request.params("matricula"))){
+                    ListaDeEstudiantes.remove(ListaDeEstudiantes.indexOf(obj));
+                    break;
+
+
+                }
+
+            }
+
+
+            response.redirect("/");
+
+            return null;
+        });
+        get("/editar/:matricula", (request, response) -> {
+
+
+            Map<String,Object> atributos = new HashMap<>();
+            for (Estudiante obj: ListaDeEstudiantes) {
+
+                if(obj.getMatricula().equals(request.params("matricula"))){
+                    int var = ListaDeEstudiantes.indexOf(obj);
+                    atributos.put("estuLista", ListaDeEstudiantes.get(var));
+                    return new FreeMarkerEngine().render(new ModelAndView(atributos, "EditarEstudiante.ftl"));
+
+
+                }
+
+            }
+
+            response.redirect("/");
+
+
+            return null;
+        });
+        post("/EditarUsuario", (request, response) -> {
+
+                StringWriter writer = new StringWriter();
+
+                String matricula = request.queryParams("matricula");
+                String nombre = request.queryParams("nombre");
+                String apellido = request.queryParams("apellido");
+                String telefono = request.queryParams("telefono");
+                Estudiante estudiante = new Estudiante(matricula, nombre, apellido, telefono);
+                for (Estudiante estuLista: ListaDeEstudiantes)
+                {
+                    if(estuLista.getMatricula() == estudiante.getMatricula())
+                    {
+                        estuLista.setNombre(estudiante.getNombre());
+                        estuLista.setApellido(estudiante.getApellido());
+                        estuLista.setMatricula(estudiante.getMatricula());
+                        estuLista.setTelefono(estudiante.getTelefono());
+                        break;
+                    }
+                }
+                response.redirect("/");
+            return writer;
+
+        });
+
+
+
+
+
 
 
 

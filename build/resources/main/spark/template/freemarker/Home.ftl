@@ -59,8 +59,8 @@
         <td>${estu.nombre}</td>
         <td>${estu.apellido}</td>
         <td>${estu.telefono}</td>
-        <td><button type="submit" value="editar" class="btn btn-primary"> <a href="/editar" style="color: azure"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></td>
-        <td><button type="submit" value="eliminar" class="btn btn-danger"> <a href="/delete" style="color: azure"> <i class="fa fa-trash"> </i></a></button></td>
+        <td><button type="submit" class="btn btn-primary"> <a href="/editar/${estu.matricula}" style="color: azure"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button></td>
+        <td><button type="submit"  class="btn btn-danger"> <a href="/delete/${estu.matricula}" style="color: azure"> <i class="fa fa-trash"> </i></a></button></td>
 
     </tr>
         <#assign hola++>

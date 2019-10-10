@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Matrícula</label>
                     <input type="text" class="form-control" id="matricula" name="matricula" aria-describedby="emailHelp"  required>
-                    <small id="emailHelp" class="form-text text-muted">Eje: 2016-4567</small>
+                    <small id="emailHelp" class="form-text text-muted">Eje: 2016-1615</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Nombre(s)</label>
@@ -54,15 +54,15 @@
 
                 </button>
             </form>
-
+        </div>
     </div>
 </div>
-
-
-
-
-
 </body>
+
+
+
+
+
 
 
 </html>
