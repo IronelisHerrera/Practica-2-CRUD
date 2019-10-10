@@ -11,7 +11,7 @@
     <title>INICIO</title>
 </head>
 <body>
-<h1>Listado Etudiantes</h1>
+<h1>Listado Estudiantes</h1>
 <!--Para mostrar usar el form que se quiere mostrar-->
 <nav class="navbar navbar-light bg-light">
     <form class="form-inline">
@@ -31,25 +31,35 @@
 <table class="table table-dark">
 
     <thead>
+
     <tr>
+
         <th scope="col">#</th>
-        <th scope="col">MATRÍCULA</th>
+        <th scope="col">MATRICULA</th>
         <th scope="col">NOMBRE</th>
         <th scope="col">APELLIDO</th>
-        <th scope="col">TELÉFONO</th>
+        <th scope="col">TELEFONO</th>
     </tr>
     </thead>
     <tbody>
-    <#list ListaDeEstudiantes as estu>
+    <#if listadeestudiantes?size gt 0>
+        <#assign hola=1 >
+
+    <#list listadeestudiantes as estu>
+
+
     <tr>
-        <th scope="row"></th>
+        <td>${hola}</td>
         <td>${estu.matricula}</td>
         <td>${estu.nombre}</td>
         <td>${estu.apellido}</td>
         <td>${estu.telefono}</td>
     </tr>
-
+        <#assign hola++>
     </#list>
+
+
+    </#if>
 
     </tbody>
 </table>

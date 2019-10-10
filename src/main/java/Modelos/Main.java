@@ -6,6 +6,7 @@ import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
+import sun.font.EAttribute;
 
 
 import java.io.File;
@@ -19,7 +20,7 @@ import static spark.Spark.*;
 
 
 public class Main {
-
+    private Estudiante estu = null;
 
 
     public static void main(String[] args) throws IOException {
@@ -28,7 +29,7 @@ public class Main {
 
         staticFiles.location("/publico");
         String templatePath = new File("").getAbsolutePath();
-        //System.out.println(templatePath);
+        System.out.println(templatePath);
         final Configuration config = new Configuration(new Version(2, 3, 0));
         config.setDirectoryForTemplateLoading(new File(templatePath +"/src/main/resources/spark/template/freemarker"));
         config.setDefaultEncoding("UTF-8"); //Renderizar con tildes.
@@ -37,24 +38,47 @@ public class Main {
 
         ArrayList<Estudiante> ListaDeEstudiantes = new ArrayList<Estudiante>();
 
+
         get("/", ((request, response) -> {
 
-            int conteo = ListaDeEstudiantes.size();
-            Template temp = config.getTemplate("Home.ftl");
-            StringWriter LeeTemplate = new StringWriter();
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("ListaDeEstudiantes", ListaDeEstudiantes);
-            attributes.put("conteo", conteo );
 
-             temp.process(attributes, LeeTemplate );
-            return LeeTemplate;
+            Map<String, Object> attributes = new HashMap<>();
+
+            attributes.put("listadeestudiantes", ListaDeEstudiantes);
+
+
+            return new FreeMarkerEngine().render(new ModelAndView(attributes, "Home.ftl"));
+
 
         }));
 
-        get("/NuevoEstudiante", (request, response) -> {
 
 
-            return null;
+        get("/NuevoEstudianteNavegacion", (request, response) -> {
+
+            Template FormAgregarEstudiante = config.getTemplate("NuevoEstudiante.ftl");
+            return FormAgregarEstudiante;
+
+        });
+
+        post("/NuevoEstudiante", (request, response) -> {
+
+           // StringWriter writerLabel = new StringWriter();
+
+
+            String matricula = (request.queryParams("matricula"));
+            //System.out.println(matricula);
+            String nombre = (request.queryParams("nombre"));
+            String apellido = (request.queryParams("apellido"));
+            String telefono = (request.queryParams("telefono"));
+
+            ListaDeEstudiantes.add(new Estudiante(matricula, nombre, apellido, telefono));
+            response.redirect("/");
+
+            return 1;
+
+
+
         });
 
 

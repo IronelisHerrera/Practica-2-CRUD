@@ -1,21 +1,33 @@
 package Modelos;
 
+import com.sun.org.apache.xpath.internal.objects.XString;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class  Estudiante {
 
-    private int matricula;
+    private String matricula;
     private String nombre;
     private String apellido;
-    private int telefono;
+    private String telefono;
+
 
     public Estudiante(){
 
     }
+
+    /*
+
     @Override
     public String toString() {
-        return String.format("matricula: %d, Nombre: %s, Apellido: %s, Telefono: %d", matricula, nombre, apellido, telefono);
+        return String.format("matricula: %s, Nombre: %s, Apellido: %s, Telefono: %s", matricula, nombre, apellido, telefono);
     }
 
-    public Estudiante(int matricula, String nombre, String apellido, int telefono ){
+
+     */
+
+    public Estudiante(String matricula, String nombre, String apellido, String telefono ){
 
         this.matricula = matricula;
         this.nombre = nombre;
@@ -24,11 +36,11 @@ public class  Estudiante {
 
     }
 
-    public int getMatricula(){
+    public String getMatricula(){
         return matricula;
     }
 
-    public int setMatricula(int matricula){
+    public String setMatricula(String matricula){
         return this.matricula = matricula;
     }
 
@@ -48,16 +60,15 @@ public class  Estudiante {
     public String setApellido(String apellido){
         return this.apellido=apellido;
     }
-    public int getTelefono(){
+    public String getTelefono(){
         return telefono;
 
     }
 
-    public int getTelefono(int telefono){
+
+    public String setTelefono(String telefono){
         return this.telefono=telefono;
-
     }
-
 
 
 }

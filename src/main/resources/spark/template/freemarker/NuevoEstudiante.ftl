@@ -18,28 +18,49 @@
             <a href="/">Listado estudiante</a>
         </button>
         <button class="btn btn-outline-dark" type="button">
-            <a href="/NuevoEstudiante">Nuevo estudiante</a>
+            <a href="/NuevoEstudianteNavegacion">Nuevo estudiante</a>
         </button>
     </form>
 </nav>
 
-<form method="post" action="/NuevoEstudiante" ">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">NUEVO ESTUDIANTE</h4>
 
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="modal-body mx-6">
+            <form method="post" action="/NuevoEstudiante" role="dialog">
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Matrícula</label>
+                    <input type="text" class="form-control" id="matricula" name="matricula" aria-describedby="emailHelp"  required>
+                    <small id="emailHelp" class="form-text text-muted">Eje: 2016-4567</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Nombre(s)</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Apellido(s)</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Telefono/Celular" required>
+                </div>
+
+                <button type="submit" value="crear" class="btn btn-primary"> <strong>Crear</strong>
+
+                </button>
+            </form>
+
     </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Crear</button>
-</form>
+</div>
+
+
+
+
 
 </body>
 
