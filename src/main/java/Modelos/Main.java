@@ -31,7 +31,6 @@ public class Main {
 
         staticFiles.location("/publico");
         String templatePath = new File("").getAbsolutePath();
-        System.out.println(templatePath);
         final Configuration config = new Configuration(new Version(2, 3, 0));
         config.setDirectoryForTemplateLoading(new File(templatePath +"/src/main/resources/spark/template/freemarker"));
         config.setDefaultEncoding("UTF-8"); //Renderizar con tildes.
@@ -65,8 +64,6 @@ public class Main {
 
         post("/NuevoEstudiante", (request, response) -> {
 
-
-
             String matricula = (request.queryParams("matricula"));
             //System.out.println(matricula);
             String nombre = (request.queryParams("nombre"));
@@ -78,8 +75,6 @@ public class Main {
 
 
             return 1;
-
-
 
         });
 

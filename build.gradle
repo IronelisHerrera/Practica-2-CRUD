@@ -1,11 +1,14 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '4.0.4'
 }
 
 group 'JetBrains'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+mainClassName = "Modelos.Main"
 
 repositories {
     mavenCentral()

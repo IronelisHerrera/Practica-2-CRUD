@@ -12,16 +12,6 @@ public class  Estudiante {
 
     }
 
-    /*
-
-    @Override
-    public String toString() {
-        return String.format("matricula: %s, Nombre: %s, Apellido: %s, Telefono: %s", matricula, nombre, apellido, telefono);
-    }
-
-
-     */
-
     public Estudiante(String matricula, String nombre, String apellido, String telefono ){
 
         this.matricula = matricula;

@@ -6,17 +6,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/EditarEstudiante.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/EditarEstudiante.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/EstudianteSeleccionado.ftl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/Home.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/Home.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/EditarEstudiante.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/EditarEstudiante.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/Home.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/Home.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Modelos/Estudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Modelos/Estudiante.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Modelos/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Modelos/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/Estudiante.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,6 +76,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -100,7 +98,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.Practica#2-CRUD [build]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Modelos.Main" />
       <module name="Practica#2-CRUD.main" />
@@ -151,7 +149,18 @@
       <option name="presentableId" value="Default" />
       <updated>1570564121658</updated>
       <workItem from="1570564128161" duration="55216000" />
-      <workItem from="1570661544685" duration="49295000" />
+      <workItem from="1570661544685" duration="58716000" />
+      <workItem from="1571530639848" duration="1378000" />
+      <workItem from="1571533637540" duration="722000" />
+      <workItem from="1571539496819" duration="10460000" />
+      <workItem from="1572404882452" duration="569000" />
+      <workItem from="1572444503406" duration="1175000" />
+      <workItem from="1572486777212" duration="763000" />
+      <workItem from="1572540411123" duration="2964000" />
+      <workItem from="1572621857027" duration="3523000" />
+      <workItem from="1572926587637" duration="1182000" />
+      <workItem from="1573004094871" duration="3103000" />
+      <workItem from="1574446942374" duration="393000" />
     </task>
     <servers />
   </component>
