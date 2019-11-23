@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42a4ecd7-72b0-430f-96cf-051fdae3e164" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Modelos/Estudiante.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Modelos/Estudiante.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Modelos/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Modelos/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Estudiante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/Estudiante.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +33,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Practica#2-CRUD" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Practica#2-CRUD" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -160,7 +156,7 @@
       <workItem from="1572621857027" duration="3523000" />
       <workItem from="1572926587637" duration="1182000" />
       <workItem from="1573004094871" duration="3103000" />
-      <workItem from="1574446942374" duration="393000" />
+      <workItem from="1574446942374" duration="1866000" />
     </task>
     <servers />
   </component>

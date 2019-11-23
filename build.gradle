@@ -13,6 +13,10 @@ mainClassName = "Modelos.Main"
 repositories {
     mavenCentral()
 }
+task stage {
+    dependsOn shadowJar
+
+}
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
