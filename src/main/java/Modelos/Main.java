@@ -27,7 +27,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        port(8080);
+        staticFiles.location("/publico");
+        final Configuration config = new Configuration(new Version(2, 3, 0));
+        config.setClassForTemplateLoading(Main.class, "/spark/template/freemarker");
+        config.setDefaultEncoding("UTF-8"); //Renderizar con tildes.
+
+       //NO UTILIZAR LA SIGUIENTE RUTA, YA QUE PARA PRACTICAS MAS AVANZADAS COMO LA #6 SERÁ IMPOSIBLE VISUALIZAR LA APP EN HEROKU
+        /*
 
         staticFiles.location("/publico");
         String templatePath = new File("").getAbsolutePath();
@@ -36,7 +42,7 @@ public class Main {
         config.setDefaultEncoding("UTF-8"); //Renderizar con tildes.
         config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         config.setLogTemplateExceptions(false);
-
+        */
         ArrayList<Estudiante> ListaDeEstudiantes = new ArrayList<Estudiante>();
 
 
