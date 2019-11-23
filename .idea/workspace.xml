@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="42a4ecd7-72b0-430f-96cf-051fdae3e164" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="42a4ecd7-72b0-430f-96cf-051fdae3e164" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +153,7 @@
       <workItem from="1572621857027" duration="3523000" />
       <workItem from="1572926587637" duration="1182000" />
       <workItem from="1573004094871" duration="3103000" />
-      <workItem from="1574446942374" duration="1866000" />
+      <workItem from="1574446942374" duration="2501000" />
     </task>
     <servers />
   </component>
