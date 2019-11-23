@@ -27,10 +27,19 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            port(Integer.parseInt(processBuilder.environment().get("PORT")));
+        }else{
+            port(8080);
+        }
+
+
+
         staticFiles.location("/publico");
         final Configuration config = new Configuration(new Version(2, 3, 0));
         config.setClassForTemplateLoading(Main.class, "/spark/template/freemarker");
-        config.setDefaultEncoding("UTF-8"); //Renderizar con tildes.
+
 
        //NO UTILIZAR LA SIGUIENTE RUTA, YA QUE PARA PRACTICAS MAS AVANZADAS COMO LA #6 SERÁ IMPOSIBLE VISUALIZAR LA APP EN HEROKU
         /*

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42a4ecd7-72b0-430f-96cf-051fdae3e164" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" afterDir="false" />
     </list>
@@ -158,6 +159,7 @@
       <workItem from="1573004094871" duration="3103000" />
       <workItem from="1574446942374" duration="2501000" />
       <workItem from="1574488727334" duration="459000" />
+      <workItem from="1574492190699" duration="1461000" />
     </task>
     <servers />
   </component>
