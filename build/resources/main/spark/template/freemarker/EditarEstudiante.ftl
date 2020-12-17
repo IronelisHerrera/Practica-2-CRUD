@@ -11,7 +11,6 @@
 <body>
 
 <h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Editar estudiante </strong></h2>
-<!--Para mostrar usar el form que se quiere mostrar-->
 <nav class="navbar navbar-light bg-light">
     <form class="form-inline">
         <button class="btn btn-outline-info " type="button">
@@ -52,7 +51,7 @@
                     <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Telefono/Celular" value="${estuLista.telefono} "required>
                 </div>
 
-                <button type="submit"  class="btn btn-primary">  Actualizar</a>
+                <button type="submit"  class="btn btn-primary">Actualizar</a>
 
                 </button>
 
@@ -63,11 +62,5 @@
 </div>
 
 </body>
-
-
-
-
-
-
 
 </html>

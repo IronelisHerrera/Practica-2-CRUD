@@ -1,31 +1,34 @@
-package Modelos;
-
+import Modelos.Estudiante;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
 import spark.ModelAndView;
 import spark.template.freemarker.FreeMarkerEngine;
-import sun.font.EAttribute;
 
 
-import java.io.File;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.UnaryOperator;
 
 import static spark.Spark.*;
 
+/**
+ * Esta clase contiene las rutas de los métodos http: GET y POST
+ * necesarios para la implementación de nuestro CRUD (Create, Read, Update y Delete).
+ * @author Ironelis Herrera
+ */
 
 public class Main {
     private static Estudiante estu;
-    //private Estudiante estu = null;
-
 
     public static void main(String[] args) throws IOException {
+
+        /**
+         * Configuración de puerto para Heroku. Corre en el 8080 por defecto.
+         * Comentar esta fracción de código para probar en el puerto por defecto de Spark: 4567.
+         * De lo contrario correr en el localhost:8080
+         */
 
         ProcessBuilder processBuilder = new ProcessBuilder();
         if (processBuilder.environment().get("PORT") != null) {
@@ -34,40 +37,23 @@ public class Main {
             port(8080);
         }
 
-
+        /*Fin de bloque a comentar*/
 
         staticFiles.location("/publico");
         final Configuration config = new Configuration(new Version(2, 3, 0));
         config.setClassForTemplateLoading(Main.class, "/spark/template/freemarker");
 
 
-       //NO UTILIZAR LA SIGUIENTE RUTA, YA QUE PARA PRACTICAS MAS AVANZADAS COMO LA #6 SERÁ IMPOSIBLE VISUALIZAR LA APP EN HEROKU
-        /*
-
-        staticFiles.location("/publico");
-        String templatePath = new File("").getAbsolutePath();
-        final Configuration config = new Configuration(new Version(2, 3, 0));
-        config.setDirectoryForTemplateLoading(new File(templatePath +"/src/main/resources/spark/template/freemarker"));
-        config.setDefaultEncoding("UTF-8"); //Renderizar con tildes.
-        config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        config.setLogTemplateExceptions(false);
-        */
         ArrayList<Estudiante> ListaDeEstudiantes = new ArrayList<Estudiante>();
-
 
         get("/", ((request, response) -> {
 
-
             Map<String, Object> attributes = new HashMap<>();
-
             attributes.put("listadeestudiantes", ListaDeEstudiantes);
-
 
             return new FreeMarkerEngine().render(new ModelAndView(attributes, "Home.ftl"));
 
-
         }));
-
 
 
         get("/NuevoEstudianteNavegacion", (request, response) -> {
@@ -80,7 +66,6 @@ public class Main {
         post("/NuevoEstudiante", (request, response) -> {
 
             String matricula = (request.queryParams("matricula"));
-            //System.out.println(matricula);
             String nombre = (request.queryParams("nombre"));
             String apellido = (request.queryParams("apellido"));
             String telefono = (request.queryParams("telefono"));
@@ -102,12 +87,9 @@ public class Main {
                     ListaDeEstudiantes.remove(ListaDeEstudiantes.indexOf(obj));
                     break;
 
-
                 }
 
             }
-
-
             response.redirect("/");
 
             return null;
@@ -123,13 +105,10 @@ public class Main {
                     atributos.put("estuLista", ListaDeEstudiantes.get(var));
                     return new FreeMarkerEngine().render(new ModelAndView(atributos, "EditarEstudiante.ftl"));
 
-
                 }
-
             }
 
             response.redirect("/");
-
 
             return null;
         });
@@ -152,25 +131,9 @@ public class Main {
             }
             response.redirect("/");
 
-
             return " ";
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
 
 }

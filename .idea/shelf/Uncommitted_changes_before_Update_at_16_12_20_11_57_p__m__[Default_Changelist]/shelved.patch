@@ -1,0 +1,696 @@
+Index: src/main/java/Modelos/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Modelos/Main.java b/src/main/java/Main.java
+rename from src/main/java/Modelos/Main.java
+rename to src/main/java/Main.java
+--- a/src/main/java/Modelos/Main.java	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/src/main/java/Main.java	(date 1608177314882)
+@@ -1,32 +1,35 @@
+-package Modelos;
+-
++import Modelos.Estudiante;
+ import freemarker.template.Configuration;
+ import freemarker.template.Template;
+-import freemarker.template.TemplateExceptionHandler;
+ import freemarker.template.Version;
+ import spark.ModelAndView;
+ import spark.template.freemarker.FreeMarkerEngine;
+-import sun.font.EAttribute;
+ 
+ 
+-import java.io.File;
+ import java.io.IOException;
+-import java.io.StringWriter;
+ import java.util.ArrayList;
+ import java.util.HashMap;
+ import java.util.Map;
+-import java.util.function.UnaryOperator;
+ 
+ import static spark.Spark.*;
+ 
++/**
++ * Esta clase contiene las rutas de los métodos http: GET y POST
++ * necesarios para la implementación de nuestro CRUD (Create, Read, Update y Delete).
++ * @author Ironelis Herrera
++ */
+ 
+ public class Main {
+     private static Estudiante estu;
+-    //private Estudiante estu = null;
+-
+ 
+     public static void main(String[] args) throws IOException {
+ 
++        /**
++         * Configuración de puerto para Heroku. Corre en el 8080 por defecto.
++         * Comentar esta fracción de código para probar en el puerto por defecto de Spark: 4567.
++         * De lo contrario correr en el localhost:8080
++         */
++
+         ProcessBuilder processBuilder = new ProcessBuilder();
+         if (processBuilder.environment().get("PORT") != null) {
+             port(Integer.parseInt(processBuilder.environment().get("PORT")));
+@@ -34,42 +37,25 @@
+             port(8080);
+         }
+ 
+-
++        /*Fin de bloque a comentar*/
+ 
+         staticFiles.location("/publico");
+         final Configuration config = new Configuration(new Version(2, 3, 0));
+         config.setClassForTemplateLoading(Main.class, "/spark/template/freemarker");
+ 
+ 
+-       //NO UTILIZAR LA SIGUIENTE RUTA, YA QUE PARA PRACTICAS MAS AVANZADAS COMO LA #6 SERÁ IMPOSIBLE VISUALIZAR LA APP EN HEROKU
+-        /*
+-
+-        staticFiles.location("/publico");
+-        String templatePath = new File("").getAbsolutePath();
+-        final Configuration config = new Configuration(new Version(2, 3, 0));
+-        config.setDirectoryForTemplateLoading(new File(templatePath +"/src/main/resources/spark/template/freemarker"));
+-        config.setDefaultEncoding("UTF-8"); //Renderizar con tildes.
+-        config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+-        config.setLogTemplateExceptions(false);
+-        */
+         ArrayList<Estudiante> ListaDeEstudiantes = new ArrayList<Estudiante>();
+ 
+-
+         get("/", ((request, response) -> {
+ 
+-
+             Map<String, Object> attributes = new HashMap<>();
+-
+             attributes.put("listadeestudiantes", ListaDeEstudiantes);
+ 
+-
+             return new FreeMarkerEngine().render(new ModelAndView(attributes, "Home.ftl"));
+ 
+-
+         }));
+ 
+ 
+-
+         get("/NuevoEstudianteNavegacion", (request, response) -> {
+ 
+             Template FormAgregarEstudiante = config.getTemplate("NuevoEstudiante.ftl");
+@@ -80,7 +66,6 @@
+         post("/NuevoEstudiante", (request, response) -> {
+ 
+             String matricula = (request.queryParams("matricula"));
+-            //System.out.println(matricula);
+             String nombre = (request.queryParams("nombre"));
+             String apellido = (request.queryParams("apellido"));
+             String telefono = (request.queryParams("telefono"));
+@@ -102,12 +87,9 @@
+                     ListaDeEstudiantes.remove(ListaDeEstudiantes.indexOf(obj));
+                     break;
+ 
+-
+                 }
+ 
+             }
+-
+-
+             response.redirect("/");
+ 
+             return null;
+@@ -123,14 +105,11 @@
+                     atributos.put("estuLista", ListaDeEstudiantes.get(var));
+                     return new FreeMarkerEngine().render(new ModelAndView(atributos, "EditarEstudiante.ftl"));
+ 
+-
+                 }
+-
+             }
+ 
+             response.redirect("/");
+ 
+-
+             return null;
+         });
+         post("/EditarUsuario", (request, response) -> {
+@@ -152,25 +131,9 @@
+             }
+             response.redirect("/");
+ 
+-
+             return " ";
+         });
+ 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+     }
+-
+-
+ 
+ }
+Index: src/main/resources/spark/template/freemarker/EditarEstudiante.ftl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/html\">\n<head>\n    <!-- Required meta tags -->\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <!-- Bootstrap CSS -->\n    <link  href=\"/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <title>EDITAR ESTUDIANTE</title>\n</head>\n<body>\n\n<h2 style=\"font-family: 'Century Gothic'; padding: 10px\"> <strong> Editar estudiante </strong></h2>\n<!--Para mostrar usar el form que se quiere mostrar-->\n<nav class=\"navbar navbar-light bg-light\">\n    <form class=\"form-inline\">\n        <button class=\"btn btn-outline-info \" type=\"button\">\n            <a href=\"/\">Listado estudiante</a>\n        </button>&nbsp;\n        <button class=\"btn btn-outline-dark\" type=\"button\">\n            <a href=\"/NuevoEstudianteNavegacion\">Nuevo estudiante</a>\n        </button>\n    </form>\n</nav>\n\n<div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header text-center\">\n            <h4 class=\"modal-title w-100 font-weight-bold\">EDITAR ESTUDIANTE</h4>\n\n        </div>\n\n        <div class=\"modal-body mx-6\">\n\n            <form method=\"post\" action=\"/EditarUsuario\" role=\"dialog\">\n\n                <div class=\"form-group\">\n                    <label for=\"matricula\">Matricula</label>\n                    <input type=\"text\" class=\"form-control\" id=\"matricula\" name=\"matricula\" aria-describedby=\"emailHelp\" value=\"${estuLista.matricula}\" required>\n                    <small id=\"emailHelp\" class=\"form-text text-muted\">Eje: 2016-1615</small>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"nombre\">Nombre(s)</label>\n                    <input type=\"text\" class=\"form-control\" id=\"nombre\" name=\"nombre\" placeholder=\"Nombre\" value=\"${estuLista.nombre}\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"apellido\">Apellido(s)</label>\n                    <input type=\"text\" class=\"form-control\" id=\"apellido\" name=\"apellido\" placeholder=\"Nombre\" value=\"${estuLista.apellido}\"required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"telefono\">Telefono</label>\n                    <input type=\"tel\" class=\"form-control\" id=\"telefono\" name=\"telefono\" placeholder=\"Telefono/Celular\" value=\"${estuLista.telefono} \"required>\n                </div>\n\n                <button type=\"submit\"  class=\"btn btn-primary\">  Actualizar</a>\n\n                </button>\n\n            </form>\n        </div>\n\n    </div>\n</div>\n\n</body>\n\n\n\n\n\n\n\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/spark/template/freemarker/EditarEstudiante.ftl b/src/main/resources/spark/template/freemarker/EditarEstudiante.ftl
+--- a/src/main/resources/spark/template/freemarker/EditarEstudiante.ftl	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/src/main/resources/spark/template/freemarker/EditarEstudiante.ftl	(date 1608176986580)
+@@ -11,7 +11,6 @@
+ <body>
+ 
+ <h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Editar estudiante </strong></h2>
+-<!--Para mostrar usar el form que se quiere mostrar-->
+ <nav class="navbar navbar-light bg-light">
+     <form class="form-inline">
+         <button class="btn btn-outline-info " type="button">
+@@ -52,7 +51,7 @@
+                     <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Telefono/Celular" value="${estuLista.telefono} "required>
+                 </div>
+ 
+-                <button type="submit"  class="btn btn-primary">  Actualizar</a>
++                <button type="submit"  class="btn btn-primary">Actualizar</a>
+ 
+                 </button>
+ 
+@@ -64,10 +63,4 @@
+ 
+ </body>
+ 
+-
+-
+-
+-
+-
+-
+ </html>
+\ No newline at end of file
+Index: src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/html\">\n<head>\n    <!-- Required meta tags -->\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <!-- Bootstrap CSS -->\n    <link  href=\"/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <title>NUEVO ESTUDIANTE</title>\n</head>\n<body>\n\n<h2 style=\"font-family: 'Century Gothic'; padding: 10px\"> <strong> Crear estudiante </strong></h2>\n<!--Para mostrar usar el form que se quiere mostrar-->\n<nav class=\"navbar navbar-light bg-light\">\n    <form class=\"form-inline\">\n        <button class=\"btn btn-outline-info \" type=\"button\">\n            <a href=\"/\">Listado estudiante</a>\n        </button>&nbsp;\n        <button class=\"btn btn-outline-dark\" type=\"button\">\n            <a href=\"/NuevoEstudianteNavegacion\">Nuevo estudiante</a>\n        </button>\n    </form>\n</nav>\n\n<div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header text-center\">\n            <h4 class=\"modal-title w-100 font-weight-bold\">NUEVO ESTUDIANTE</h4>\n\n        </div>\n        <div class=\"modal-body mx-6\">\n            <form method=\"post\" action=\"/NuevoEstudiante\" role=\"dialog\">\n\n                <div class=\"form-group\">\n                    <label for=\"exampleInputEmail1\">Matrícula</label>\n                    <input type=\"text\" class=\"form-control\" id=\"matricula\" name=\"matricula\" aria-describedby=\"emailHelp\"  required>\n                    <small id=\"emailHelp\" class=\"form-text text-muted\">Eje: 2016-1615</small>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"exampleInputPassword1\">Nombre(s)</label>\n                    <input type=\"text\" class=\"form-control\" id=\"nombre\" name=\"nombre\" placeholder=\"Nombre\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"exampleInputPassword1\">Apellido(s)</label>\n                    <input type=\"text\" class=\"form-control\" id=\"apellido\" name=\"apellido\" placeholder=\"Nombre\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"exampleInputPassword1\">Teléfono</label>\n                    <input type=\"tel\" class=\"form-control\" id=\"telefono\" name=\"telefono\" placeholder=\"Telefono/Celular\" required>\n                </div>\n\n                <button type=\"submit\" value=\"crear\" class=\"btn btn-primary\"> <strong>Crear</strong>\n\n                </button>\n            </form>\n        </div>\n    </div>\n</div>\n</body>\n\n\n\n\n\n\n\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl b/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl
+--- a/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl	(date 1608176986584)
+@@ -11,7 +11,6 @@
+ <body>
+ 
+ <h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Crear estudiante </strong></h2>
+-<!--Para mostrar usar el form que se quiere mostrar-->
+ <nav class="navbar navbar-light bg-light">
+     <form class="form-inline">
+         <button class="btn btn-outline-info " type="button">
+@@ -59,10 +58,4 @@
+ </div>
+ </body>
+ 
+-
+-
+-
+-
+-
+-
+ </html>
+\ No newline at end of file
+Index: build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/html\">\n<head>\n    <!-- Required meta tags -->\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <!-- Bootstrap CSS -->\n    <link  href=\"/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <title>NUEVO ESTUDIANTE</title>\n</head>\n<body>\n\n<h2 style=\"font-family: 'Century Gothic'; padding: 10px\"> <strong> Crear estudiante </strong></h2>\n<!--Para mostrar usar el form que se quiere mostrar-->\n<nav class=\"navbar navbar-light bg-light\">\n    <form class=\"form-inline\">\n        <button class=\"btn btn-outline-info \" type=\"button\">\n            <a href=\"/\">Listado estudiante</a>\n        </button>&nbsp;\n        <button class=\"btn btn-outline-dark\" type=\"button\">\n            <a href=\"/NuevoEstudianteNavegacion\">Nuevo estudiante</a>\n        </button>\n    </form>\n</nav>\n\n<div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header text-center\">\n            <h4 class=\"modal-title w-100 font-weight-bold\">NUEVO ESTUDIANTE</h4>\n\n        </div>\n        <div class=\"modal-body mx-6\">\n            <form method=\"post\" action=\"/NuevoEstudiante\" role=\"dialog\">\n\n                <div class=\"form-group\">\n                    <label for=\"exampleInputEmail1\">Matrícula</label>\n                    <input type=\"text\" class=\"form-control\" id=\"matricula\" name=\"matricula\" aria-describedby=\"emailHelp\"  required>\n                    <small id=\"emailHelp\" class=\"form-text text-muted\">Eje: 2016-1615</small>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"exampleInputPassword1\">Nombre(s)</label>\n                    <input type=\"text\" class=\"form-control\" id=\"nombre\" name=\"nombre\" placeholder=\"Nombre\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"exampleInputPassword1\">Apellido(s)</label>\n                    <input type=\"text\" class=\"form-control\" id=\"apellido\" name=\"apellido\" placeholder=\"Nombre\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"exampleInputPassword1\">Teléfono</label>\n                    <input type=\"tel\" class=\"form-control\" id=\"telefono\" name=\"telefono\" placeholder=\"Telefono/Celular\" required>\n                </div>\n\n                <button type=\"submit\" value=\"crear\" class=\"btn btn-primary\"> <strong>Crear</strong>\n\n                </button>\n            </form>\n        </div>\n    </div>\n</div>\n</body>\n\n\n\n\n\n\n\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl b/build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl
+--- a/build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/build/resources/main/spark/template/freemarker/NuevoEstudiante.ftl	(date 1608177367507)
+@@ -11,7 +11,6 @@
+ <body>
+ 
+ <h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Crear estudiante </strong></h2>
+-<!--Para mostrar usar el form que se quiere mostrar-->
+ <nav class="navbar navbar-light bg-light">
+     <form class="form-inline">
+         <button class="btn btn-outline-info " type="button">
+@@ -59,10 +58,4 @@
+ </div>
+ </body>
+ 
+-
+-
+-
+-
+-
+-
+ </html>
+\ No newline at end of file
+Index: build/resources/main/spark/template/freemarker/Home.ftl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n<html lang=\"en\">\n<head>\n    <!-- Required meta tags -->\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n\n    <!-- Bootstrap CSS -->\n    <link  href=\"/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <!-- Para el Font-Awesome -->\n    <link  href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\">\n\n    <title>INICIO</title>\n</head>\n<body>\n<h2 style=\"font-family: 'Century Gothic'; padding: 10px\"> <strong> Listado Estudiantes </strong></h2>\n<!--Para mostrar usar el form que se quiere mostrar-->\n<nav class=\"navbar navbar-light bg-light\">\n    <form class=\"form-inline\">\n        <button class=\"btn btn-outline-info \" type=\"button\">\n        <a href=\"/\">Listado estudiante</a>\n        </button>&nbsp;\n        <button class=\"btn btn-outline-dark\" type=\"button\">\n            <a href=\"/NuevoEstudianteNavegacion\">Nuevo estudiante</a>\n\n        </button>\n    </form>\n</nav>\n\n\n<div class=\"bg-primary text-center text-white\">\n\n<table class=\"table table-dark\">\n\n    <thead>\n\n    <tr>\n\n        <th scope=\"col\">#</th>\n        <th scope=\"col\">MATRICULA</th>\n        <th scope=\"col\">NOMBRE</th>\n        <th scope=\"col\">APELLIDO</th>\n        <th scope=\"col\">TELEFONO</th>\n        <th scope=\"col\">EDITAR</th>\n        <th scope=\"col\">ELIMINAR</th>\n\n    </tr>\n    </thead>\n    <tbody>\n    <#if listadeestudiantes?size gt 0>\n        <#assign hola=1 >\n\n        <#list listadeestudiantes as estu>\n\n\n            <tr>\n                <td>${hola}</td>\n                <td>${estu.matricula}</td>\n                <td>${estu.nombre}</td>\n                <td>${estu.apellido}</td>\n                <td>${estu.telefono}</td>\n                <td><button type=\"submit\" class=\"btn btn-primary\"> <a href=\"/editar/${estu.matricula}\" style=\"color: azure\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a></button></td>\n                <td><button type=\"submit\"  class=\"btn btn-danger\"> <a href=\"/delete/${estu.matricula}\" style=\"color: azure\"> <i class=\"fa fa-trash\"> </i></a></button></td>\n\n            </tr>\n\n         <#assign hola++>\n       </#list>\n\n    </#if>\n\n    </tbody>\n</table>\n\n<!-- Optional JavaScript -->\n<!-- jQuery first, then Popper.js, then Bootstrap JS -->\n<script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>\n</div>\n</body>\n\n\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build/resources/main/spark/template/freemarker/Home.ftl b/build/resources/main/spark/template/freemarker/Home.ftl
+--- a/build/resources/main/spark/template/freemarker/Home.ftl	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/build/resources/main/spark/template/freemarker/Home.ftl	(date 1608177367507)
+@@ -14,7 +14,6 @@
+ </head>
+ <body>
+ <h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Listado Estudiantes </strong></h2>
+-<!--Para mostrar usar el form que se quiere mostrar-->
+ <nav class="navbar navbar-light bg-light">
+     <form class="form-inline">
+         <button class="btn btn-outline-info " type="button">
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/uiDesigner.xml b/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(date 1608176173001)
++++ b/.idea/uiDesigner.xml	(date 1608176173001)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.png" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.png" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.png" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/resources/spark/template/freemarker/Home.ftl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n<html lang=\"en\">\n<head>\n    <!-- Required meta tags -->\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n\n    <!-- Bootstrap CSS -->\n    <link  href=\"/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <!-- Para el Font-Awesome -->\n    <link  href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\">\n\n    <title>INICIO</title>\n</head>\n<body>\n<h2 style=\"font-family: 'Century Gothic'; padding: 10px\"> <strong> Listado Estudiantes </strong></h2>\n<!--Para mostrar usar el form que se quiere mostrar-->\n<nav class=\"navbar navbar-light bg-light\">\n    <form class=\"form-inline\">\n        <button class=\"btn btn-outline-info \" type=\"button\">\n        <a href=\"/\">Listado estudiante</a>\n        </button>&nbsp;\n        <button class=\"btn btn-outline-dark\" type=\"button\">\n            <a href=\"/NuevoEstudianteNavegacion\">Nuevo estudiante</a>\n\n        </button>\n    </form>\n</nav>\n\n\n<div class=\"bg-primary text-center text-white\">\n\n<table class=\"table table-dark\">\n\n    <thead>\n\n    <tr>\n\n        <th scope=\"col\">#</th>\n        <th scope=\"col\">MATRICULA</th>\n        <th scope=\"col\">NOMBRE</th>\n        <th scope=\"col\">APELLIDO</th>\n        <th scope=\"col\">TELEFONO</th>\n        <th scope=\"col\">EDITAR</th>\n        <th scope=\"col\">ELIMINAR</th>\n\n    </tr>\n    </thead>\n    <tbody>\n    <#if listadeestudiantes?size gt 0>\n        <#assign hola=1 >\n\n        <#list listadeestudiantes as estu>\n\n\n            <tr>\n                <td>${hola}</td>\n                <td>${estu.matricula}</td>\n                <td>${estu.nombre}</td>\n                <td>${estu.apellido}</td>\n                <td>${estu.telefono}</td>\n                <td><button type=\"submit\" class=\"btn btn-primary\"> <a href=\"/editar/${estu.matricula}\" style=\"color: azure\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a></button></td>\n                <td><button type=\"submit\"  class=\"btn btn-danger\"> <a href=\"/delete/${estu.matricula}\" style=\"color: azure\"> <i class=\"fa fa-trash\"> </i></a></button></td>\n\n            </tr>\n\n         <#assign hola++>\n       </#list>\n\n    </#if>\n\n    </tbody>\n</table>\n\n<!-- Optional JavaScript -->\n<!-- jQuery first, then Popper.js, then Bootstrap JS -->\n<script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>\n</div>\n</body>\n\n\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/spark/template/freemarker/Home.ftl b/src/main/resources/spark/template/freemarker/Home.ftl
+--- a/src/main/resources/spark/template/freemarker/Home.ftl	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/src/main/resources/spark/template/freemarker/Home.ftl	(date 1608176986576)
+@@ -14,7 +14,6 @@
+ </head>
+ <body>
+ <h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Listado Estudiantes </strong></h2>
+-<!--Para mostrar usar el form que se quiere mostrar-->
+ <nav class="navbar navbar-light bg-light">
+     <form class="form-inline">
+         <button class="btn btn-outline-info " type="button">
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	(date 1608175349543)
++++ b/.idea/jarRepositories.xml	(date 1608175349543)
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="MavenRepo" />
++      <option name="name" value="MavenRepo" />
++      <option name="url" value="https://repo.maven.apache.org/maven2/" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	(date 1608175349531)
++++ b/.idea/compiler.xml	(date 1608175349531)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/.idea/misc.xml	(date 1608175349523)
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"42a4ecd7-72b0-430f-96cf-051fdae3e164\" name=\"Default Changelist\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/gradle.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/gradle.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Modelos/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Modelos/Main.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"EXCLUDED_CONVERTED_TO_IGNORED\" value=\"true\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ExternalProjectsData\">\n    <projectState path=\"$PROJECT_DIR$\">\n      <ProjectState />\n    </projectState>\n  </component>\n  <component name=\"ExternalProjectsManager\">\n    <system id=\"GRADLE\">\n      <state>\n        <task path=\"$PROJECT_DIR$\">\n          <activation />\n        </task>\n        <projects_view>\n          <tree_state>\n            <expand>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Practica#2-CRUD\" type=\"f1a62948:ProjectNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Practica#2-CRUD\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Practica#2-CRUD\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\n                <item name=\"application\" type=\"c8890929:TasksNode$1\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Practica#2-CRUD\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\n                <item name=\"build\" type=\"c8890929:TasksNode$1\" />\n              </path>\n            </expand>\n            <select />\n          </tree_state>\n        </projects_view>\n      </state>\n    </system>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"1Rw32FuTsRkPAxAAT9ykkuuvhmR\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\Martinez\\IdeaProjects\\Practica#2-CRUD\\src\\main\\resources\\publico\\bootstrap\\font-awesome\" />\n      <recent name=\"C:\\Users\\Martinez\\IdeaProjects\\Practica#2-CRUD\\src\\main\\resources\\publico\" />\n      <recent name=\"C:\\Users\\Martinez\\IdeaProjects\\Practica#2-CRUD\\src\\main\\resources\\spark\\template\\freemarker\\tema\" />\n      <recent name=\"C:\\Users\\Martinez\\IdeaProjects\\Practica#2-CRUD\\src\\main\\resources\\spark\\template\\freemarker\\css\" />\n    </key>\n  </component>\n  <component name=\"RunDashboard\">\n    <option name=\"ruleStates\">\n      <list>\n        <RuleState>\n          <option name=\"name\" value=\"ConfigurationTypeDashboardGroupingRule\" />\n        </RuleState>\n        <RuleState>\n          <option name=\"name\" value=\"StatusDashboardGroupingRule\" />\n        </RuleState>\n      </list>\n    </option>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.Main\">\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"Modelos.Main\" />\n      <module name=\"Practica#2-CRUD.main\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"Modelos.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Practica#2-CRUD [build]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\n      <ExternalSystemSettings>\n        <option name=\"executionName\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\n        <option name=\"scriptParameters\" />\n        <option name=\"taskDescriptions\">\n          <list />\n        </option>\n        <option name=\"taskNames\">\n          <list>\n            <option value=\"build\" />\n          </list>\n        </option>\n        <option name=\"vmOptions\" />\n      </ExternalSystemSettings>\n      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>\n      <method v=\"2\" />\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.Main\" />\n        <item itemvalue=\"Gradle.Practica#2-CRUD [build]\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SvnConfiguration\">\n    <configuration />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"42a4ecd7-72b0-430f-96cf-051fdae3e164\" name=\"Default Changelist\" comment=\"\" />\n      <created>1570564121658</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1570564121658</updated>\n      <workItem from=\"1570564128161\" duration=\"55216000\" />\n      <workItem from=\"1570661544685\" duration=\"58716000\" />\n      <workItem from=\"1571530639848\" duration=\"1378000\" />\n      <workItem from=\"1571533637540\" duration=\"722000\" />\n      <workItem from=\"1571539496819\" duration=\"10460000\" />\n      <workItem from=\"1572404882452\" duration=\"569000\" />\n      <workItem from=\"1572444503406\" duration=\"1175000\" />\n      <workItem from=\"1572486777212\" duration=\"763000\" />\n      <workItem from=\"1572540411123\" duration=\"2964000\" />\n      <workItem from=\"1572621857027\" duration=\"3523000\" />\n      <workItem from=\"1572926587637\" duration=\"1182000\" />\n      <workItem from=\"1573004094871\" duration=\"3103000\" />\n      <workItem from=\"1574446942374\" duration=\"2501000\" />\n      <workItem from=\"1574488727334\" duration=\"459000\" />\n      <workItem from=\"1574492190699\" duration=\"1461000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"1\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"COLUMN_ORDER\" />\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/.idea/workspace.xml	(date 1608177138655)
+@@ -1,12 +1,30 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
+   <component name="ChangeListManager">
+     <list default="true" id="42a4ecd7-72b0-430f-96cf-051fdae3e164" name="Default Changelist" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Modelos/Main.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Modelos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/EditarEstudiante.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/EditarEstudiante.ftl" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/Home.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/Home.ftl" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/spark/template/freemarker/NuevoEstudiante.ftl" afterDir="false" />
+     </list>
+-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -67,9 +85,15 @@
+   <component name="ProjectId" id="1Rw32FuTsRkPAxAAT9ykkuuvhmR" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="2" id="Add" />
++  </component>
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent">
+     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
++    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
++    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+     <property name="aspect.path.notification.shown" value="true" />
+@@ -82,26 +106,17 @@
+       <recent name="C:\Users\Martinez\IdeaProjects\Practica#2-CRUD\src\main\resources\spark\template\freemarker\tema" />
+       <recent name="C:\Users\Martinez\IdeaProjects\Practica#2-CRUD\src\main\resources\spark\template\freemarker\css" />
+     </key>
+-  </component>
+-  <component name="RunDashboard">
+-    <option name="ruleStates">
+-      <list>
+-        <RuleState>
+-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+-        </RuleState>
+-        <RuleState>
+-          <option name="name" value="StatusDashboardGroupingRule" />
+-        </RuleState>
+-      </list>
+-    </option>
++    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
++      <recent name="" />
++    </key>
+   </component>
+   <component name="RunManager" selected="Application.Main">
+     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="Modelos.Main" />
++      <option name="MAIN_CLASS_NAME" value="Main" />
+       <module name="Practica#2-CRUD.main" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="Modelos.*" />
++          <option name="PATTERN" value=".*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+@@ -109,6 +124,17 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
++      <option name="arquillianRunConfiguration">
++        <value>
++          <option name="containerStateName" value="" />
++        </value>
++      </option>
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="Practica#2-CRUD [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -125,7 +151,9 @@
+         </option>
+         <option name="vmOptions" />
+       </ExternalSystemSettings>
+-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
++      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
+     <recent_temporary>
+@@ -135,6 +163,7 @@
+       </list>
+     </recent_temporary>
+   </component>
++  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="SvnConfiguration">
+     <configuration />
+   </component>
+@@ -160,24 +189,24 @@
+       <workItem from="1574446942374" duration="2501000" />
+       <workItem from="1574488727334" duration="459000" />
+       <workItem from="1574492190699" duration="1461000" />
++      <workItem from="1608175338567" duration="1800000" />
+     </task>
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+-    <option name="version" value="1" />
++    <option name="version" value="3" />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+       <map>
+         <entry key="MAIN">
+           <value>
+-            <State>
+-              <option name="COLUMN_ORDER" />
+-            </State>
++            <State />
+           </value>
+         </entry>
+       </map>
+     </option>
++    <option name="oldMeFiltersMigrated" value="true" />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+Index: build/resources/main/spark/template/freemarker/EditarEstudiante.ftl
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!doctype html>\n<html lang=\"en\" xmlns=\"http://www.w3.org/1999/html\">\n<head>\n    <!-- Required meta tags -->\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n    <!-- Bootstrap CSS -->\n    <link  href=\"/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <title>EDITAR ESTUDIANTE</title>\n</head>\n<body>\n\n<h2 style=\"font-family: 'Century Gothic'; padding: 10px\"> <strong> Editar estudiante </strong></h2>\n<!--Para mostrar usar el form que se quiere mostrar-->\n<nav class=\"navbar navbar-light bg-light\">\n    <form class=\"form-inline\">\n        <button class=\"btn btn-outline-info \" type=\"button\">\n            <a href=\"/\">Listado estudiante</a>\n        </button>&nbsp;\n        <button class=\"btn btn-outline-dark\" type=\"button\">\n            <a href=\"/NuevoEstudianteNavegacion\">Nuevo estudiante</a>\n        </button>\n    </form>\n</nav>\n\n<div class=\"modal-dialog\" role=\"document\">\n    <div class=\"modal-content\">\n        <div class=\"modal-header text-center\">\n            <h4 class=\"modal-title w-100 font-weight-bold\">EDITAR ESTUDIANTE</h4>\n\n        </div>\n\n        <div class=\"modal-body mx-6\">\n\n            <form method=\"post\" action=\"/EditarUsuario\" role=\"dialog\">\n\n                <div class=\"form-group\">\n                    <label for=\"matricula\">Matricula</label>\n                    <input type=\"text\" class=\"form-control\" id=\"matricula\" name=\"matricula\" aria-describedby=\"emailHelp\" value=\"${estuLista.matricula}\" required>\n                    <small id=\"emailHelp\" class=\"form-text text-muted\">Eje: 2016-1615</small>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"nombre\">Nombre(s)</label>\n                    <input type=\"text\" class=\"form-control\" id=\"nombre\" name=\"nombre\" placeholder=\"Nombre\" value=\"${estuLista.nombre}\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"apellido\">Apellido(s)</label>\n                    <input type=\"text\" class=\"form-control\" id=\"apellido\" name=\"apellido\" placeholder=\"Nombre\" value=\"${estuLista.apellido}\"required>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"telefono\">Telefono</label>\n                    <input type=\"tel\" class=\"form-control\" id=\"telefono\" name=\"telefono\" placeholder=\"Telefono/Celular\" value=\"${estuLista.telefono} \"required>\n                </div>\n\n                <button type=\"submit\"  class=\"btn btn-primary\">  Actualizar</a>\n\n                </button>\n\n            </form>\n        </div>\n\n    </div>\n</div>\n\n</body>\n\n\n\n\n\n\n\n</html>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build/resources/main/spark/template/freemarker/EditarEstudiante.ftl b/build/resources/main/spark/template/freemarker/EditarEstudiante.ftl
+--- a/build/resources/main/spark/template/freemarker/EditarEstudiante.ftl	(revision 145abedbda7b13ab3e5bb0c178bf194d8a901ecf)
++++ b/build/resources/main/spark/template/freemarker/EditarEstudiante.ftl	(date 1608177367507)
+@@ -11,7 +11,6 @@
+ <body>
+ 
+ <h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Editar estudiante </strong></h2>
+-<!--Para mostrar usar el form que se quiere mostrar-->
+ <nav class="navbar navbar-light bg-light">
+     <form class="form-inline">
+         <button class="btn btn-outline-info " type="button">
+@@ -52,7 +51,7 @@
+                     <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Telefono/Celular" value="${estuLista.telefono} "required>
+                 </div>
+ 
+-                <button type="submit"  class="btn btn-primary">  Actualizar</a>
++                <button type="submit"  class="btn btn-primary">Actualizar</a>
+ 
+                 </button>
+ 
+@@ -64,10 +63,4 @@
+ 
+ </body>
+ 
+-
+-
+-
+-
+-
+-
+ </html>
+\ No newline at end of file

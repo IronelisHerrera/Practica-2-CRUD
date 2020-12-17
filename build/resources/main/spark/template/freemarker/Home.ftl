@@ -14,7 +14,6 @@
 </head>
 <body>
 <h2 style="font-family: 'Century Gothic'; padding: 10px"> <strong> Listado Estudiantes </strong></h2>
-<!--Para mostrar usar el form que se quiere mostrar-->
 <nav class="navbar navbar-light bg-light">
     <form class="form-inline">
         <button class="btn btn-outline-info " type="button">
