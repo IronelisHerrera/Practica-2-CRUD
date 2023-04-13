@@ -1,4 +1,4 @@
-# Práctica-2-6-CRUD-PaaS-PWeb-1
+# Práctica-2-6-CRUD-PaaS-Programación-Web-1
 
 Este repositorio consta de dos implementaciones:
 - CRUD utilizando el framework Spark para aplicaciones web en Java. 
